@@ -8,24 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- Login Screen -->
-    <div id="login-screen" class="screen active">
-        <div class="login-container">
-            <div class="logo">
-                <h1>4D</h1>
-                <p>Dad and Dom's Daily Devo</p>
-            </div>
-            <div class="login-box">
-                <h2>Welcome!</h2>
-                <p>Enter the family code to begin</p>
-                <input type="password" id="password-input" placeholder="Family Code" onkeypress="if(event.key==='Enter') login()" />
-                <button onclick="login()">Enter</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Name Selection Screen -->
-    <div id="name-screen" class="screen">
+    <!-- Name Selection Screen (No password needed) -->
+    <div id="name-screen" class="screen active">
         <div class="name-container">
             <h2>Who's joining today?</h2>
             <div class="name-buttons">

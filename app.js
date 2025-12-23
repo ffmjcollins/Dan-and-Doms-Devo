@@ -12,27 +12,19 @@ let notesData = {};
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    checkAuth();
+    // Skip password - go straight to checking for saved user
+    const savedUser = localStorage.getItem('4d-user');
+    if (savedUser) {
+        currentUser = savedUser;
+        showScreen('app-screen');
+        initializeApp();
+    } else {
+        // Show name selection
+        showScreen('name-screen');
+    }
 });
 
-// Authentication
-function login() {
-    console.log('Login function called');
-    const input = document.getElementById('password-input');
-    const password = input ? input.value : '';
-    console.log('Password entered:', password);
-    console.log('Password length:', password.length);
-    
-    if (password === 'John15:13' || password === 'john15:13') {
-        console.log('Password correct! Logging in...');
-        localStorage.setItem('4d-auth', 'true');
-        showScreen('name-screen');
-        alert('Login successful! Choose Dad or Dom.');
-    } else {
-        console.log('Password incorrect');
-        alert('Incorrect family code.\n\nTry: John15:13\n(Capital J, no spaces)');
-    }
-}
+// Authentication - REMOVED (no password needed)
 
 function selectUser(user) {
     currentUser = user;
@@ -42,23 +34,9 @@ function selectUser(user) {
 }
 
 function logout() {
-    localStorage.removeItem('4d-auth');
     localStorage.removeItem('4d-user');
     currentUser = null;
-    showScreen('login-screen');
-}
-
-function checkAuth() {
-    const isAuthed = localStorage.getItem('4d-auth');
-    const savedUser = localStorage.getItem('4d-user');
-    
-    if (isAuthed && savedUser) {
-        currentUser = savedUser;
-        showScreen('app-screen');
-        initializeApp();
-    } else if (isAuthed) {
-        showScreen('name-screen');
-    }
+    showScreen('name-screen');
 }
 
 function showScreen(screenId) {
