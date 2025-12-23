@@ -18,9 +18,8 @@
             <div class="login-box">
                 <h2>Welcome!</h2>
                 <p>Enter the family code to begin</p>
-                <input type="password" id="password-input" placeholder="Family Code" />
+                <input type="password" id="password-input" placeholder="Family Code" onkeypress="if(event.key==='Enter') login()" />
                 <button onclick="login()">Enter</button>
-                <p class="hint">Hint: John 15:13</p>
             </div>
         </div>
     </div>
