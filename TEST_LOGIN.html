@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4D Login Test</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #1a2332;
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+        input {
+            padding: 15px;
+            font-size: 18px;
+            margin: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .hidden { display: none; }
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>4D Login Test</h1>
+    <p>This tests if the password works</p>
+    
+    <div id="login-area">
+        <input type="password" id="password-input" placeholder="Enter: John15:13" 
+               onkeypress="if(event.key==='Enter') testLogin()" />
+        <br>
+        <button onclick="testLogin()">Test Login</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <script>
+        function testLogin() {
+            const password = document.getElementById('password-input').value;
+            const result = document.getElementById('result');
+            
+            result.innerHTML = `
+                <h3>Debug Info:</h3>
+                <p><strong>You entered:</strong> "${password}"</p>
+                <p><strong>Length:</strong> ${password.length} characters</p>
+                <p><strong>Checking...</strong></p>
+            `;
+            
+            if (password === 'John15:13') {
+                result.innerHTML += '<p style="color: #0f0; font-size: 24px;">✅ CORRECT! Password matches "John15:13"</p>';
+            } else if (password === 'john15:13') {
+                result.innerHTML += '<p style="color: #0f0; font-size: 24px;">✅ CORRECT! Password matches "john15:13"</p>';
+            } else {
+                result.innerHTML += '<p style="color: #f00; font-size: 24px;">❌ WRONG! Password does not match</p>';
+                result.innerHTML += '<p>Try exactly: <strong>John15:13</strong> (capital J, no spaces)</p>';
+            }
+        }
+    </script>
+</body>
+</html>

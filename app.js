@@ -17,12 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Authentication
 function login() {
-    const password = document.getElementById('password-input').value;
+    console.log('Login function called');
+    const input = document.getElementById('password-input');
+    const password = input ? input.value : '';
+    console.log('Password entered:', password);
+    console.log('Password length:', password.length);
+    
     if (password === 'John15:13' || password === 'john15:13') {
+        console.log('Password correct! Logging in...');
         localStorage.setItem('4d-auth', 'true');
         showScreen('name-screen');
+        alert('Login successful! Choose Dad or Dom.');
     } else {
-        alert('Incorrect family code. Try again!');
+        console.log('Password incorrect');
+        alert('Incorrect family code.\n\nTry: John15:13\n(Capital J, no spaces)');
     }
 }
 
@@ -54,8 +62,18 @@ function checkAuth() {
 }
 
 function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
+    console.log('Switching to screen:', screenId);
+    document.querySelectorAll('.screen').forEach(s => {
+        s.classList.remove('active');
+        console.log('Removed active from:', s.id);
+    });
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        console.log('Added active to:', screenId);
+    } else {
+        console.error('Screen not found:', screenId);
+    }
 }
 
 // Initialize Supabase (if configured)
