@@ -12,16 +12,19 @@ let notesData = {};
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    // Skip password - go straight to checking for saved user
+    // Check if user already selected
     const savedUser = localStorage.getItem('4d-user');
     if (savedUser) {
         currentUser = savedUser;
-        showScreen('app-screen');
-        initializeApp();
     } else {
-        // Show name selection
-        showScreen('name-screen');
+        // Default to "Dad" if no one selected yet
+        currentUser = 'Dad';
+        localStorage.setItem('4d-user', 'Dad');
     }
+    
+    // Go straight to app
+    showScreen('app-screen');
+    initializeApp();
 });
 
 // Authentication - REMOVED (no password needed)
