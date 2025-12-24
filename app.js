@@ -1,7 +1,7 @@
 // 4D Devotional App - Main Logic
 // Supabase Configuration
-const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // Replace after setup
-const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Replace after setup
+const SUPABASE_URL = 'https://dckctxdcxblpsbewsnda.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRja2N0eGRjeGJscHNiZXdzbmRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1MDE5NjQsImV4cCI6MjA4MjA3Nzk2NH0.OPpUCNyoiihkmqnBy4fBpurZ2amIfTmWDuldr1401AI';
 let supabase;
 
 // App State
