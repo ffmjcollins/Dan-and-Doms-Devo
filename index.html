@@ -8,32 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- Name Selection Screen (No password needed) -->
-    <div id="name-screen" class="screen active">
-        <div class="name-container">
-            <h2>Who's joining today?</h2>
-            <div class="name-buttons">
-                <button class="name-btn" onclick="selectUser('Dad')">
-                    <span class="emoji">👨‍👦</span>
-                    <span>Dad</span>
-                </button>
-                <button class="name-btn" onclick="selectUser('Dom')">
-                    <span class="emoji">🎣</span>
-                    <span>Dom</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main App Screen -->
-    <div id="app-screen" class="screen">
+    <!-- Main App Screen - Opens directly -->
+    <div id="app-screen" class="screen active">
         <!-- Header -->
         <header>
             <div class="header-content">
                 <h1>4D</h1>
                 <div class="user-info">
                     <span id="current-user"></span>
-                    <button class="logout-btn" onclick="logout()">Logout</button>
+                    <button class="logout-btn" onclick="logout()">Switch User</button>
                 </div>
             </div>
         </header>

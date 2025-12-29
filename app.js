@@ -37,9 +37,19 @@ function selectUser(user) {
 }
 
 function logout() {
-    localStorage.removeItem('4d-user');
-    currentUser = null;
-    showScreen('name-screen');
+    // Toggle between Dad and Dom
+    if (currentUser === 'Dad') {
+        currentUser = 'Dom';
+    } else {
+        currentUser = 'Dad';
+    }
+    localStorage.setItem('4d-user', currentUser);
+    
+    // Refresh the display
+    document.getElementById('current-user').textContent = currentUser;
+    loadDevotion(currentDay);
+    loadNotes(currentDay);
+    checkCompletion(currentDay);
 }
 
 function showScreen(screenId) {

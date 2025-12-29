@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4D Button Test</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #1a2332 0%, #2c4563 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 72px;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: #ff6b35;
+            color: white;
+            padding: 20px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background: #f97316;
+        }
+        #output {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        .success {
+            color: #0f0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>4D Button Test</h1>
+    <p>Click these buttons to test if JavaScript is working:</p>
+    
+    <button class="button" onclick="testButton('Button 1')">Test Button 1</button>
+    <button class="button" onclick="testButton('Button 2')">Test Button 2</button>
+    
+    <div id="output">
+        <p>Click a button above...</p>
+    </div>
+    
+    <hr style="margin: 40px 0; border-color: #ff6b35;">
+    
+    <h2>Supabase Connection Test</h2>
+    <button class="button" onclick="testSupabase()">Test Supabase Connection</button>
+    
+    <div id="supabase-output" style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+        <p>Click button above to test Supabase...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Test basic button functionality
+        function testButton(buttonName) {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <p class="success">✅ ${buttonName} WORKS!</p>
+                <p>JavaScript is functioning correctly.</p>
+                <p>Time: ${new Date().toLocaleTimeString()}</p>
+            `;
+            console.log(buttonName + ' clicked at ' + new Date().toLocaleTimeString());
+        }
+        
+        // Test Supabase connection
+        async function testSupabase() {
+            const output = document.getElementById('supabase-output');
+            output.innerHTML = '<p>⏳ Testing Supabase connection...</p>';
+            
+            try {
+                // Your actual Supabase credentials
+                const SUPABASE_URL = 'https://dckctxdcxblpsbewsnda.supabase.co';
+                const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRja2N0eGRjeGJscHNiZXdzbmRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1MDE5NjQsImV4cCI6MjA4MjA3Nzk2NH0.OPpUCNyoiihkmqnBy4fBpurZ2amIfTmWDuldr1401AI';
+                
+                // Create Supabase client
+                const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                
+                output.innerHTML += '<p>✅ Supabase client created</p>';
+                
+                // Try to query notes table
+                const { data, error } = await supabase
+                    .from('notes')
+                    .select('*')
+                    .limit(1);
+                
+                if (error) {
+                    output.innerHTML += `
+                        <p style="color: #f00;">❌ ERROR: ${error.message}</p>
+                        <p>This usually means the database tables aren't created yet.</p>
+                        <p><strong>You need to run the SQL commands in Supabase!</strong></p>
+                    `;
+                    console.error('Supabase error:', error);
+                } else {
+                    output.innerHTML += `
+                        <p class="success">✅ SUPABASE CONNECTED!</p>
+                        <p>Database tables exist and are accessible.</p>
+                        <p>Found ${data ? data.length : 0} existing notes.</p>
+                    `;
+                    console.log('Supabase data:', data);
+                }
+                
+            } catch (err) {
+                output.innerHTML += `
+                    <p style="color: #f00;">❌ EXCEPTION: ${err.message}</p>
+                    <p>Check browser console (F12) for details.</p>
+                `;
+                console.error('Test error:', err);
+            }
+        }
+        
+        // Log when page loads
+        console.log('Test page loaded successfully');
+        console.log('Current time:', new Date().toLocaleTimeString());
+    </script>
+</body>
+</html>
